@@ -240,28 +240,22 @@ for pop_dir in all_COSMIC_runs:
     print ("total BBH detection rate: ", np.sum(mbin_BBH_rate_array))
     print ("total DCO detection rate: ", np.sum(mbin_tot_rate_array))
     
-    #all_BBH_pop_mbin_rates.append(mbin_BBH_rate_array)
-    #all_tot_pop_mbin_rates.append(mbin_tot_rate_array)
-    #all_BBH_f_loc.append(f_loc_BBH_array)
-    #all_tot_f_loc.append(f_loc_tot_array)
+    all_BBH_pop_mbin_rates.append(mbin_BBH_rate_array)
+    all_tot_pop_mbin_rates.append(mbin_tot_rate_array)
+    all_BBH_f_loc.append(f_loc_BBH_array)
+    all_tot_f_loc.append(f_loc_tot_array)
 
     mbin_BBH_rate_array = []
     mbin_tot_rate_array = []
     f_loc_BBH_array = []
     f_loc_tot_array = []
 
-## save 2D array of mbin rates for all metallicities
-#np.save("all_Z_BBH_mbin_rates", all_BBH_pop_mbin_rates)
-#np.save("all_Z_tot_mbin_rates", all_tot_pop_mbin_rates)
-#np.save("all_Z_BBH_f_loc", all_BBH_f_loc)
-#np.save("all_Z_tot_f_loc", all_tot_f_loc)
-
 ## to get final rates for each population, sum across all mass bins   
-#j = 0
-#for BBH_rate_vals, tot_rate_vals in zip(all_BBH_pop_mbin_rates, all_tot_pop_mbin_rates):  
-#    full_BBH_rate = np.sum(BBH_rate_vals)
-#    full_tot_rate = np.sum(tot_rate_vals)
-#    this_df = pd.DataFrame([[read_mets[j], full_BBH_rate, full_tot_rate]], columns=columns)
-#    df = df.append(this_df, sort=False, ignore_index=True)
-#    j += 1
-#df.to_csv("Z_pop_rates.csv", index=False)
+j = 0
+for BBH_rate_vals, tot_rate_vals in zip(all_BBH_pop_mbin_rates, all_tot_pop_mbin_rates):  
+    full_BBH_rate = np.sum(BBH_rate_vals)
+    full_tot_rate = np.sum(tot_rate_vals)
+    this_df = pd.DataFrame([[read_mets[j], full_BBH_rate, full_tot_rate]], columns=columns)
+    df = df.append(this_df, sort=False, ignore_index=True)
+    j += 1
+df.to_csv("Z_pop_rates.csv", index=False)
